@@ -1,18 +1,4 @@
-package chess;
-
-/**
- * 
- * @author Andrew Zhou, Bang An
- * 
- */
-
-import chesspieces.Piece;
-import chesspieces.Queen;
-import chesspieces.Rook;
-import chesspieces.Bishop;
-import chesspieces.King;
-import chesspieces.Knight;
-import chesspieces.Pawn;
+package chesspieces;
 
 public class Node {
 	String gridColor;

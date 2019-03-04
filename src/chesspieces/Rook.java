@@ -7,13 +7,16 @@ package chesspieces;
  */
 
 public class Rook extends Piece {
-
+	
+	boolean firstMove;
+	
 	public Rook(String player) {
 		super(player);
+		this.firstMove = true;
 	}
 
 	@Override
-	void move(String initial, String end) {
+	void move(String initial, String end, String player, Node[][] board) {
 
 	}
 	

@@ -1,12 +1,6 @@
 package chess;
 
-/**
- * 
- * @author Andrew Zhou, Bang An
- * 
- */
-
-import chess.Node;
+import chesspieces.Node;
 
 public class Chess {
 
@@ -14,7 +8,7 @@ public class Chess {
 		Node[][] board = new Node[8][8];
 		Node.initialize(board);
 		Node.print(board);
-
+		
 	}
 
 }

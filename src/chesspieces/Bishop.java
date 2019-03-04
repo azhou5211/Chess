@@ -13,7 +13,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	void move(String initial, String end) {
+	void move(String initial, String end, String player, Node[][] board) {
 
 	}
 	
