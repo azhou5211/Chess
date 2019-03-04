@@ -12,7 +12,12 @@ public class Chess {
 	public static void blackMove(Node[][] board) throws IOException {
 		System.out.println("");
 		System.out.print("Black's move: ");
-		String next_move = reader.readLine(); 
+		String next_move = reader.readLine();
+		String[] splitted = next_move.split("\\s+");
+		System.out.println(splitted.length);
+		String initial = splitted[0];
+		String end = splitted[1];
+		
 		System.out.println("");
 		Node.print(board);
 		whiteMove(board);
@@ -21,7 +26,11 @@ public class Chess {
 	public static void whiteMove(Node[][] board) throws IOException {
 		System.out.println("");
 		System.out.print("White's move: ");
-		String next_move = reader.readLine(); 
+		String next_move = reader.readLine();
+		String[] splitted = next_move.split("\\s+");
+		String initial = splitted[0];
+		String end = splitted[1];
+		
 		System.out.println("");
 		Node.print(board);
 		blackMove(board);
