@@ -4,11 +4,6 @@ public class Node {
 	String gridColor;
 	boolean gridEmpty;
 	Piece piece;
-
-	public Node(String color, boolean gridEmpty) {
-		this.gridColor = color;
-		this.gridEmpty = gridEmpty;
-	}
 	
 	public Node(String color, boolean gridEmpty, Piece piece) {
 		this.gridColor = color;
