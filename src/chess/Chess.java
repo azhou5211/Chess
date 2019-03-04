@@ -3,7 +3,7 @@ package chess;
 /**
  * 
  * @author Andrew Zhou, Bang An
- * JSON external library has been used
+ * 
  */
 
 
