@@ -8,21 +8,24 @@ import chesspieces.*;
 public class Chess {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	static Node[][] board = new Node[8][8];
 	
 	// Given player's king. Check if enemy is attacking.
-	public static boolean attacked(Node[][] board, String player) {
+	public static boolean attacked(int i,int j, String player) {
 		// TODO Check all directions
+		int row = i;
+		int col = j;
 		return false;
 	}
 	
 	// Checking checkmate. Check if king is in checkmate. Check if there are no valid moves from all pieces	
-	public static boolean kingIsChecked(Node[][] board) {
+	public static boolean kingIsChecked() {
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
 				if(board[i][j].gridEmpty==false) {
 					if(board[i][j].piece instanceof King) {
 						String player = board[i][j].piece.player;
-						if(attacked(board,player)) {
+						if(attacked(i,j,player)) {
 							return true;
 						}
 					}
@@ -33,7 +36,7 @@ public class Chess {
 		return false;
 	}
 	
-	public static void whiteMove(Node[][] board) throws IOException {
+	public static void whiteMove() throws IOException {
 		System.out.println("");
 		System.out.print("White's move: ");
 		String next_move = reader.readLine();
@@ -48,10 +51,10 @@ public class Chess {
 		
 		System.out.println("");
 		Node.print(board);
-		blackMove(board);
+		blackMove();
 	}
 	
-	public static void blackMove(Node[][] board) throws IOException {
+	public static void blackMove() throws IOException {
 		System.out.println("");
 		System.out.print("Black's move: ");
 		String next_move = reader.readLine();
@@ -61,14 +64,14 @@ public class Chess {
 		
 		System.out.println("");
 		Node.print(board);
-		whiteMove(board);
+		whiteMove();
 	}
 	
 	public static void main(String[] args) throws IOException {
-		Node[][] board = new Node[8][8];
+		//Node[][] board = new Node[8][8];
 		Node.initialize(board);
 		Node.print(board);
-		whiteMove(board);
+		whiteMove();
 	}
 
 }
