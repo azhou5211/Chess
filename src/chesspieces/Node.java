@@ -1,9 +1,9 @@
 package chesspieces;
 
 public class Node {
-	String gridColor;
-	boolean gridEmpty;
-	Piece piece;
+	public String gridColor;
+	public boolean gridEmpty;
+	public Piece piece;
 	
 	public Node(String color, boolean gridEmpty, Piece piece) {
 		this.gridColor = color;
@@ -76,7 +76,8 @@ public class Node {
 					System.out.print(board[i][j].piece);
 				}
 			}
-			System.out.println((8 - i));
+			//System.out.println((8 - i));
+			System.out.println(i);
 		}
 		System.out.println(" a  b  c  d  e  f  g  h");
 	}

@@ -16,7 +16,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	void move(String initial, String end, String player, Node[][] board) {
+	public void move(String initial, String end, String player, Node[][] board) {
 		/**
 		 * Castling Rules
 		 * Your king has been moved earlier in the game. 

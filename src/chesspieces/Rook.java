@@ -16,7 +16,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	void move(String initial, String end, String player, Node[][] board) {
+	public void move(String initial, String end, String player, Node[][] board) {
 
 	}
 	

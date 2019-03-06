@@ -7,9 +7,10 @@ package chesspieces;
  */
 
 public abstract class Piece {
-	String player;
-	abstract void move(String initial, String end, String player, Node[][] board);
-	
+	public String player;
+	public abstract void move(String initial, String end, String player, Node[][] board);
+	//public abstract boolean checkedKing(String initial);
+
 	public Piece(String player) {
 		this.player = player;
 	}
