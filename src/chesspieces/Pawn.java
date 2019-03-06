@@ -10,16 +10,21 @@ public class Pawn extends Piece {
 	
 	boolean firstMove;
 	
-	public Pawn(String player) {
-		super(player);
+	public Pawn(String player, int row, int col) {
+		super(player,row,col);
 		this.firstMove = true;
 	}
 
 	@Override
-	public void move(String initial, String end, String player, Node[][] board) {
-		if(firstMove) {
-			
+	public boolean move(String end, String player, Node[][] board) {
+		// Current position. row = this.row. col = this.col
+		int[] endIndex = Piece.getIndex(end);
+		if(player.equals("w")) {
+			if(firstMove == true) {
+				
+			}
 		}
+		return false;
 	}
 	
 	public String toString() {

@@ -8,13 +8,13 @@ package chesspieces;
 
 public class Queen extends Piece {
 
-	public Queen(String player) {
-		super(player);
+	public Queen(String player, int row,int col) {
+		super(player,row,col);
 	}
 
 	@Override
-	public void move(String initial, String end, String player, Node[][] board) {
-
+	public boolean move(String end, String player, Node[][] board) {
+		return false;
 	}
 	
 	public String toString() {
