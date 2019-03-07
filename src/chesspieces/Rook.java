@@ -68,11 +68,13 @@ public class Rook extends Piece {
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
 						Piece.executeMove(board, endIndex, this.row, this.col);
+						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
 							Piece.executeMove(board, endIndex, this.row, this.col);
+							this.firstMove = false;
 							return true;
 						}
 					}
@@ -84,11 +86,13 @@ public class Rook extends Piece {
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
 						Piece.executeMove(board, endIndex, this.row, this.col);
+						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
 							Piece.executeMove(board, endIndex, this.row, this.col);
+							this.firstMove = false;
 							return true;
 						}
 					}
@@ -100,11 +104,13 @@ public class Rook extends Piece {
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
 						Piece.executeMove(board, endIndex, this.row, this.col);
+						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
 							Piece.executeMove(board, endIndex, this.row, this.col);
+							this.firstMove = false;
 							return true;
 						}
 					}
@@ -116,11 +122,13 @@ public class Rook extends Piece {
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
 						Piece.executeMove(board, endIndex, this.row, this.col);
+						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
 							Piece.executeMove(board, endIndex, this.row, this.col);
+							this.firstMove = false;
 							return true;
 						}
 					}
