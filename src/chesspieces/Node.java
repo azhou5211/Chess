@@ -63,8 +63,8 @@ public class Node {
 		
 		//board[5][5].piece = new Pawn("b",5,5);
 		//board[5][5].gridEmpty = false;
-		board[5][5].piece = new Rook("w",5,5);
-		board[5][5].gridEmpty = false;
+		//board[5][5].piece = new Rook("w",5,5);
+		//board[5][5].gridEmpty = false;
 	}
 
 	public static void print(Node[][] board) {
