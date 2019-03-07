@@ -1,5 +1,7 @@
 package chesspieces;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Andrew Zhou, Bang An
@@ -13,7 +15,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board) {
+	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
 		int row = this.row;
 		int col = this.col;
 		int[] endIndex = Piece.getIndex(end);
@@ -55,12 +57,12 @@ public class Knight extends Piece {
 		if (checkEndIndex) {
 			if (board[this.row][this.col].piece.player.equals(player)) {
 				if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-					Piece.executeMove(board, endIndex, this.row, this.col);
+					Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 					return true;
 				} else {
 					String enemyPlayer = Piece.getEnemyPlayer(player);
 					if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-						Piece.executeMove(board, endIndex, this.row, this.col);
+						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 						return true;
 					}
 				}

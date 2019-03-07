@@ -1,5 +1,7 @@
 package chesspieces;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Andrew Zhou, Bang An
@@ -16,7 +18,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board) {
+	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
 		int row = this.row;
 		int col = this.col;
 		int[] endIndex = Piece.getIndex(end);
@@ -67,13 +69,13 @@ public class Rook extends Piece {
 						}
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-						Piece.executeMove(board, endIndex, this.row, this.col);
+						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-							Piece.executeMove(board, endIndex, this.row, this.col);
+							Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 							this.firstMove = false;
 							return true;
 						}
@@ -85,13 +87,13 @@ public class Rook extends Piece {
 						}
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-						Piece.executeMove(board, endIndex, this.row, this.col);
+						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-							Piece.executeMove(board, endIndex, this.row, this.col);
+							Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 							this.firstMove = false;
 							return true;
 						}
@@ -103,13 +105,13 @@ public class Rook extends Piece {
 						}
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-						Piece.executeMove(board, endIndex, this.row, this.col);
+						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-							Piece.executeMove(board, endIndex, this.row, this.col);
+							Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 							this.firstMove = false;
 							return true;
 						}
@@ -121,13 +123,13 @@ public class Rook extends Piece {
 						}
 					}
 					if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-						Piece.executeMove(board, endIndex, this.row, this.col);
+						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 						this.firstMove = false;
 						return true;
 					} else {
 						String enemyPlayer = Piece.getEnemyPlayer(player);
 						if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-							Piece.executeMove(board, endIndex, this.row, this.col);
+							Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
 							this.firstMove = false;
 							return true;
 						}

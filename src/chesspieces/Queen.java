@@ -1,5 +1,7 @@
 package chesspieces;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Andrew Zhou, Bang An
@@ -13,7 +15,7 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board) {
+	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
 		return false;
 	}
 	

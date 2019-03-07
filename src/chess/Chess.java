@@ -3,13 +3,16 @@ package chess;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import chesspieces.*;
 
 public class Chess {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static Node[][] board = new Node[8][8];
-
+	static ArrayList<String> moveHistory = new ArrayList<String>();
+	
 	// Given player's king. Check if enemy is attacking.
 	public static boolean attacked(int i, int j, String player) {
 		// TODO Check all directions
@@ -51,7 +54,7 @@ public class Chess {
 			} else if (splitted.length == 2) {
 				// 2 inputs
 				int[] initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board)==false) {
+				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board, moveHistory)==false) {
 					getNewMove("w");
 				}
 			} else {
@@ -73,7 +76,7 @@ public class Chess {
 			} else if (splitted.length == 2) {
 				// 2 inputs
 				int[] initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board)==false) {
+				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
 				}
 			} else {
@@ -103,7 +106,7 @@ public class Chess {
 		} else if (splitted.length == 2) {
 			// 2 inputs
 			int[] initialIndex = Piece.getIndex(splitted[0]);
-			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board)==false) {
+			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board,moveHistory)==false) {
 				getNewMove("w");
 			}
 		} else {
@@ -130,7 +133,7 @@ public class Chess {
 			return;
 		} else if (splitted.length == 2) {
 			int[] initialIndex = Piece.getIndex(splitted[0]);
-			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board)==false) {
+			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board,moveHistory)==false) {
 				getNewMove("b");
 			}
 		} else {

@@ -1,5 +1,7 @@
 package chesspieces;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Andrew Zhou, Bang An
@@ -16,7 +18,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board) {
+	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
 		/**
 		 * Castling Rules
 		 * Your king has been moved earlier in the game. 
