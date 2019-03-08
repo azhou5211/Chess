@@ -11,7 +11,7 @@ public class Chess {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static Node[] board = new Node[64];
-	static ArrayList<String> moveHistory = new ArrayList<String>();
+	public static ArrayList<String> moveHistory = new ArrayList<String>();
 	public static Piece whiteKing;
 	public static Piece blackKing;
 
@@ -123,6 +123,7 @@ public class Chess {
 		// Node[][] board = new Node[8][8];
 		Node.initialize(board);
 		whiteKing = board[7*8+4].piece;
+		//whiteKing = board[3*8+2].piece;
 		blackKing = board[0*8+4].piece;
 		Node.print(board);
 		whiteMove();

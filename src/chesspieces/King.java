@@ -31,10 +31,12 @@ public class King extends Piece {
 		int knightIndex8 = kingIndex + 6; // left down
 
 		// Going up
-		for (int i = kingIndex - 8; i >= 0; i -= 8) {
-			if (!board[i].gridEmpty) {
-				if (board[i].piece.player.equals(enemyPlayer) && (board[i].piece instanceof Rook
-						|| board[i].piece instanceof Queen)) {
+		int row = (int) Math.floor(kingIndex / 8);
+		int col = kingIndex%8;
+		for (int i = row-1; i >= 0; i--) {
+			if (!board[i*8+col].gridEmpty) {
+				if (board[i*8+col].piece.player.equals(enemyPlayer) && (board[i*8+col].piece instanceof Rook
+						|| board[i*8+col].piece instanceof Queen)) {
 					return true;
 				}
 				break;
@@ -42,10 +44,10 @@ public class King extends Piece {
 		}
 
 		// Going down
-		for (int i = kingIndex + 8; i < 64; i += 8) {
-			if (!board[i].gridEmpty) {
-				if (board[i].piece.player.equals(enemyPlayer) && (board[i].piece instanceof Rook
-						|| board[i].piece instanceof Queen)) {
+		for (int i = row+1; i < 8; i++) {
+			if (!board[i*8+col].gridEmpty) {
+				if (board[i*8+col].piece.player.equals(enemyPlayer) && (board[i*8+col].piece instanceof Rook
+						|| board[i*8+col].piece instanceof Queen)) {
 					return true;
 				}
 				break;
@@ -53,7 +55,7 @@ public class King extends Piece {
 		}
 
 		// Going left
-		int row = (int) Math.floor(kingIndex / 8);
+		row = (int) Math.floor(kingIndex / 8);
 		for (int i = kingIndex - 1; i >= row * 8; i--) {
 			if (!board[i].gridEmpty) {
 				if (board[i].piece.player.equals(enemyPlayer) && (board[i].piece instanceof Rook
@@ -65,8 +67,8 @@ public class King extends Piece {
 		}
 
 		// Going right
-		row++;
-		for (int i = kingIndex + 1; i < row * 8; i++) {
+		//row++;
+		for (int i = kingIndex + 1; i < (row+1) * 8; i++) {
 			if (!board[i].gridEmpty) {
 				if (board[i].piece.player.equals(enemyPlayer) && (board[i].piece instanceof Rook
 						|| board[i].piece instanceof Queen)) {
@@ -78,7 +80,7 @@ public class King extends Piece {
 
 		// Going up left
 		int i = kingIndex - 9;
-		int col = (kingIndex % 8) - 1;
+		col = (kingIndex % 8) - 1;
 		while (col >= 0 && i >= 0) {
 			if (!board[i].gridEmpty) {
 				if (board[i].piece.player.equals(enemyPlayer) && (board[i].piece instanceof Bishop || board[i].piece instanceof Queen)) {
@@ -131,57 +133,59 @@ public class King extends Piece {
 			i += 7;
 			col--;
 		}
-
-		if (knightIndex1 >= 0) {
+		
+		row = (int) Math.floor(kingIndex/8);
+		col = kingIndex%8;
+		if (knightIndex1 >= 0 && row-1>=0 && col-2>=0) {
 			if (board[knightIndex1].piece.player.equals(enemyPlayer)
 					&& board[knightIndex1].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex2 >= 0) {
+		if (knightIndex2 >= 0 && row-2>=0 && col-1>=0) {
 			if (board[knightIndex2].piece.player.equals(enemyPlayer)
 					&& board[knightIndex2].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex3 >= 0) {
+		if (knightIndex3 >= 0  && row-2>=0 && col+1<8) {
 			if (board[knightIndex3].piece.player.equals(enemyPlayer)
 					&& board[knightIndex3].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex4 >= 0) {
+		if (knightIndex4 >= 0 && row-1>=0 && col+2<8) {
 			if (board[knightIndex4].piece.player.equals(enemyPlayer)
 					&& board[knightIndex4].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex5 < 64) {
+		if (knightIndex5 < 64 && row+1<8 && col+2<8) {
 			if (board[knightIndex5].piece.player.equals(enemyPlayer)
 					&& board[knightIndex5].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex6 < 64) {
+		if (knightIndex6 < 64 && row+2<8 && col+1<8) {
 			if (board[knightIndex6].piece.player.equals(enemyPlayer)
 					&& board[knightIndex6].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex7 < 64) {
+		if (knightIndex7 < 64 && row+2<8 && col-1>=0) {
 			if (board[knightIndex7].piece.player.equals(enemyPlayer)
 					&& board[knightIndex7].piece instanceof Knight) {
 				return true;
 			}
 		}
 
-		if (knightIndex8 < 64) {
+		if (knightIndex8 < 64 && row+1<8 && col-2>=0) {
 			if (board[knightIndex8].piece.player.equals(enemyPlayer)
 					&& board[knightIndex8].piece instanceof Knight) {
 				return true;
@@ -192,7 +196,7 @@ public class King extends Piece {
 			// White king
 			// pawn attacks at up left and up right
 			// up left
-			if (tempIndex2 >= 0) {
+			if (tempIndex2 >= 0 && row-1>=0 && col-1>=0) {
 				if (board[tempIndex2].piece.player.equals(enemyPlayer)
 						&& board[tempIndex2].piece instanceof Pawn) {
 					return true;
@@ -200,7 +204,7 @@ public class King extends Piece {
 			}
 
 			// up right
-			if (tempIndex4 >= 0) {
+			if (tempIndex4 >= 0 && row-1>=0 && col+1<8) {
 				if (board[tempIndex4].piece.player.equals(enemyPlayer)
 						&& board[tempIndex4].piece instanceof Pawn) {
 					return true;
@@ -210,7 +214,7 @@ public class King extends Piece {
 			// Black King
 			// pawn attacks down left and down right
 			// down right
-			if (tempIndex6 < 64) {
+			if (tempIndex6 < 64 && row+1<8 && col+1<8) {
 				if (board[tempIndex6].piece.player.equals(enemyPlayer)
 						&& board[tempIndex6].piece instanceof Pawn) {
 					return true;
@@ -218,7 +222,7 @@ public class King extends Piece {
 			}
 
 			// down left
-			if (tempIndex8 < 64) {
+			if (tempIndex8 < 64 && row+1<8 && col-1>=0) {
 				if (board[tempIndex8].piece.player.equals(enemyPlayer)
 						&& board[tempIndex8].piece instanceof Pawn) {
 					return true;
@@ -233,6 +237,8 @@ public class King extends Piece {
 		ArrayList<Integer> moveList = new ArrayList<Integer>();
 		String enemyPlayer = Piece.getEnemyPlayer(player);
 
+		int row = (int) Math.floor(startIndex/8);
+		int col = startIndex%8;
 		int tempIndex1 = startIndex - 1; // left
 		int tempIndex2 = startIndex - 9; // up left
 		int tempIndex3 = startIndex - 8; // up
@@ -242,7 +248,7 @@ public class King extends Piece {
 		int tempIndex7 = startIndex + 8; // down
 		int tempIndex8 = startIndex + 7; // down left
 
-		if (tempIndex1 >= 0) {
+		if (tempIndex1 >= 0 && col-1>=0) {
 			if (board[tempIndex1].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex1, player)) {
 					moveList.add(tempIndex1);
@@ -256,7 +262,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex2 >= 0) {
+		if (tempIndex2 >= 0 && row-1>=0 && col-1>=0) {
 			if (board[tempIndex2].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex2, player)) {
 					moveList.add(tempIndex2);
@@ -270,7 +276,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex3 >= 0) {
+		if (tempIndex3 >= 0 && row-1>=0) {
 			if (board[tempIndex3].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex3, player)) {
 					moveList.add(tempIndex3);
@@ -284,7 +290,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex4 >= 0) {
+		if (tempIndex4 >= 0 && row-1>=0 && col+1<8) {
 			if (board[tempIndex4].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex4, player)) {
 					moveList.add(tempIndex4);
@@ -298,7 +304,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex5 < 64) {
+		if (tempIndex5 < 64 && col+1<8) {
 			if (board[tempIndex5].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex5, player)) {
 					moveList.add(tempIndex5);
@@ -312,7 +318,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex6 < 64) {
+		if (tempIndex6 < 64 && row+1<8 && col+1<8) {
 			if (board[tempIndex6].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex6, player)) {
 					moveList.add(tempIndex6);
@@ -326,7 +332,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex7 < 64) {
+		if (tempIndex7 < 64 && row+1<8) {
 			if (board[tempIndex7].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex7, player)) {
 					moveList.add(tempIndex7);
@@ -340,7 +346,7 @@ public class King extends Piece {
 			}
 		}
 
-		if (tempIndex8 < 64) {
+		if (tempIndex8 < 64 && row+1<8 && col-1>=0) {
 			if (board[tempIndex8].gridEmpty) {
 				if (!isPositionChecked(board, tempIndex8, player)) {
 					moveList.add(tempIndex8);
@@ -447,6 +453,7 @@ public class King extends Piece {
 		}
 		
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
+		//Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
 			this.firstMove = false;

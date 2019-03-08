@@ -19,31 +19,33 @@ public class Rook extends Piece {
 		String enemyPlayer = Piece.getEnemyPlayer(player);
 		
 		// Going up
-		for(int i=startIndex-8;i>=0;i-=8) {
-			if(board[i].gridEmpty) {
-				moveList.add(i);
+		int row = (int) Math.floor(startIndex/8);
+		int col = startIndex%8;
+		for(int i=row-1;i>=0;i--) {
+			if(board[i*8+col].gridEmpty) {
+				moveList.add(i*8+col);
 			} else {
-				if(board[i].piece.player.equals(enemyPlayer)) {
-					moveList.add(i);
+				if(board[i*8+col].piece.player.equals(enemyPlayer)) {
+					moveList.add(i*8+col);
 				}
 				break;
 			}
 		}
 		
 		// Going down
-		for(int i=startIndex+8;i<64;i+=8) {
-			if(board[i].gridEmpty) {
-				moveList.add(i);
+		for(int i=row+1;i<8;i++) {
+			if(board[i*8+col].gridEmpty) {
+				moveList.add(i*8+col);
 			} else {
-				if(board[i].piece.player.equals(enemyPlayer)) {
-					moveList.add(i);
+				if(board[i*8+col].piece.player.equals(enemyPlayer)) {
+					moveList.add(i*8+col);
 				}
 				break;
 			}
 		}
 		
 		// Going left
-		int row = (int) Math.floor(startIndex/8);
+		row = (int) Math.floor(startIndex/8);
 		for(int i=startIndex-1;i>=row*8;i--) {
 			if(board[i].gridEmpty) {
 				moveList.add(i);
@@ -77,6 +79,7 @@ public class Rook extends Piece {
 		}
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		int endIndex = Piece.getIndex(end);
+		//Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
 				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);

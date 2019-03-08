@@ -75,10 +75,20 @@ public abstract class Piece {
 	
 	public static int distance(String move) {
 		String[] splitted = move.split("\\s+");
-		int startRow = splitted[0].charAt(0) - 'a';
-		int startCol = 8 - (splitted[0].charAt(1) - '0');
-		int endRow = splitted[1].charAt(0) - 'a';
-		int endCol = 8 - (splitted[1].charAt(1) - '0');
+		int startIndex = Integer.parseInt(splitted[0]);
+		int endIndex = Integer.parseInt(splitted[1]);
+		int startRow = (int) Math.floor(startIndex/8);
+		int startCol = startIndex%8;
+		int endRow = (int) Math.floor(endIndex/8);
+		int endCol = endIndex%8;
+
+		/*
+		System.out.println("start row:" + startRow);
+		System.out.println("end row:" + endRow);
+		System.out.println("start col:" + startCol);
+		System.out.println("end col:" + endCol);
+		*/
+		
 		int distance = Math.abs((endRow - startRow)) + Math.abs((endCol - startCol));
 		return distance;
 	}

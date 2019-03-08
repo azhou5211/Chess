@@ -30,7 +30,8 @@ public class Node {
 
 			}
 		}
-
+		
+		
 		for (int i = 0; i < 8; i++) {
 			board[1*8+i].piece = new Pawn("b",1*8+i);
 			board[1*8+i].gridEmpty = false;
@@ -39,7 +40,7 @@ public class Node {
 			board[0*8+i].gridEmpty = false;
 			board[7*8+i].gridEmpty = false;
 		}
-
+		
 		board[0*8+0].piece = new Rook("b",0*8+0);
 		board[0*8+7].piece = new Rook("b",0*8+7);
 		board[7*8+0].piece = new Rook("w",7*8+0);
@@ -64,16 +65,21 @@ public class Node {
 		
 		//board[5][5].piece = new Pawn("b",5,5);
 		//board[5][5].gridEmpty = false;
-		//board[5][5].piece = new Rook("w",5,5);
-		//board[5][5].gridEmpty = false;
-		//board[3*8+3].piece = new Knight("w",3*8+3);
+		//board[5*8+5].piece = new Rook("w",5*8+5);
+		//board[5*8+5].gridEmpty = false;
+		//board[6*8+1].piece = new Knight("w",6*8+1);
+		//board[6*8+1].gridEmpty = false;
+		//board[4*8+4].piece = new Bishop("b",4*8+4);
+		//board[4*8+4].gridEmpty = false;
+		//board[3*8+3].piece = new Knight("b",3*8+3);
 		//board[3*8+3].gridEmpty = false;
-		//board[4*8+3].piece = new Knight("w",4*8+3);
-		//board[4*8+3].gridEmpty = false;
-		//board[4*8+3].piece = new Rook("w",4*8+3);
-		//board[4*8+3].gridEmpty = false;
-		//board[4*8+3].piece = new Queen("w",4*8+3);
-		//board[4*8+3].gridEmpty = false;
+		//board[3*8+3].piece = new Rook("w",3*8+3);
+		//board[3*8+3].gridEmpty = false;
+		//board[3*8+4].piece = new Rook("b",3*8+4);
+		//board[3*8+4].gridEmpty = false;
+		//board[3*8+2].piece = new King("w",3*8+2);
+		//board[3*8+2].gridEmpty = false;
+		//board[6*8+7].piece = new Pawn("b",6*8+7);
 		
 		/*
 		board[3*8+3].piece = new King("w",3*8+3);
