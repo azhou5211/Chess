@@ -14,33 +14,6 @@ public class Chess {
 	static ArrayList<String> moveHistory = new ArrayList<String>();
 	public static Piece whiteKing;
 	public static Piece blackKing;
-	
-	// Given player's king. Check if enemy is attacking.
-	public static boolean attacked(int i, int j, String player) {
-		// TODO Check all directions
-		int row = i;
-		int col = j;
-		return false;
-	}
-
-	// Checking checkmate. Check if king is in checkmate. Check if there are no
-	// valid moves from all pieces
-	public static boolean kingIsChecked() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (board[i*8+j].gridEmpty == false) {
-					if (board[i*8+j].piece instanceof King) {
-						String player = board[i*8+j].piece.player;
-						if (attacked(i, j, player)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-
-		return false;
-	}
 
 	public static void getNewMove(String player) throws IOException {
 		System.out.println("Illegal Move, try again");
