@@ -10,65 +10,119 @@ import java.util.ArrayList;
 
 public class Knight extends Piece {
 
-	public Knight(String player, int row, int col) {
-		super(player, row, col);
+	public Knight(String player, int startIndex) {
+		super(player, startIndex);
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
-		int row = this.row;
-		int col = this.col;
-		int[] endIndex = Piece.getIndex(end);
-		boolean checkEndIndex = false;
-
-		// Up 2 and left 1
-		if (row + 2 == endIndex[0] && col - 1 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Up 2 and right 1
-		if (row + 2 == endIndex[0] && col + 1 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// right 2 and up 1
-		if (row + 1 == endIndex[0] && col + 2 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Right 2 and down 1
-		if (row - 1 == endIndex[0] && col + 2 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Down 2 and left 1
-		if (row - 2 == endIndex[0] && col - 1 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Down 2 and right 1
-		if (row - 2 == endIndex[0] && col + 1 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Left 2 and up 1
-		if (row + 1 == endIndex[0] && col - 2 == endIndex[1]) {
-			checkEndIndex = true;
-		} else
-		// Left 2 and down 1
-		if (row - 1 == endIndex[0] && col - 2 == endIndex[1]) {
-			checkEndIndex = true;
-		}
-
-		if (checkEndIndex) {
-			if (board[this.row][this.col].piece.player.equals(player)) {
-				if (board[endIndex[0]][endIndex[1]].gridEmpty) {
-					Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
-					return true;
-				} else {
-					String enemyPlayer = Piece.getEnemyPlayer(player);
-					if (board[endIndex[0]][endIndex[1]].piece.player.equals(enemyPlayer)) {
-						Piece.executeMove(board, endIndex, this.row, this.col,moveHistory);
-						return true;
-					}
+	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
+		ArrayList<Integer> moveList = new ArrayList<Integer>();
+		
+		String enemyPlayer = Piece.getEnemyPlayer(player);
+		
+		int tempIndex1 = startIndex - 10; // left up
+		int tempIndex2 = startIndex - 17; // up left
+		int tempIndex3 = startIndex - 15; // up right
+		int tempIndex4 = startIndex - 6; // right up
+		int tempIndex5 = startIndex + 10; // right down
+		int tempIndex6 = startIndex +17; //down right
+		int tempIndex7 = startIndex +15; // down left
+		int tempIndex8 = startIndex + 6; // left down
+		
+		if(tempIndex1 >=0) {
+			if(board[tempIndex1].gridEmpty) {
+				moveList.add(tempIndex1);
+			} else {
+				if(board[tempIndex1].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex1);
 				}
 			}
 		}
-
+		
+		if(tempIndex2 >=0) {
+			if(board[tempIndex2].gridEmpty) {
+				moveList.add(tempIndex2);
+			} else {
+				if(board[tempIndex2].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex2);
+				}
+			}
+		}
+		
+		if(tempIndex3 >=0) {
+			if(board[tempIndex3].gridEmpty) {
+				moveList.add(tempIndex3);
+			} else {
+				if(board[tempIndex3].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex3);
+				}
+			}
+		}
+		
+		if(tempIndex4 >=0) {
+			if(board[tempIndex4].gridEmpty) {
+				moveList.add(tempIndex4);
+			} else {
+				if(board[tempIndex4].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex4);
+				}
+			}
+		}
+		
+		if(tempIndex5 < 64) {
+			if(board[tempIndex5].gridEmpty) {
+				moveList.add(tempIndex5);
+			} else {
+				if(board[tempIndex5].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex5);
+				}
+			}
+		}
+		
+		if(tempIndex6 < 64) {
+			if(board[tempIndex6].gridEmpty) {
+				moveList.add(tempIndex6);
+			} else {
+				if(board[tempIndex6].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex6);
+				}
+			}
+		}
+		
+		if(tempIndex7 < 64) {
+			if(board[tempIndex7].gridEmpty) {
+				moveList.add(tempIndex7);
+			} else {
+				if(board[tempIndex7].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex7);
+				}
+			}
+		}
+		
+		if(tempIndex8 < 64) {
+			if(board[tempIndex8].gridEmpty) {
+				moveList.add(tempIndex8);
+			} else {
+				if(board[tempIndex8].piece.player.equals(enemyPlayer)) {
+					moveList.add(tempIndex8);
+				}
+			}
+		}
+		return moveList;
+	}
+	
+	@Override
+	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
+		if(!board[this.startIndex].piece.player.equals(player)) {
+			return false;
+		}
+		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
+		int endIndex = Piece.getIndex(end);
+		if(moveList.contains(endIndex)) {
+			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
+			return true;
+		}
+		//System.out.println(moveList);
 		return false;
 	}
 

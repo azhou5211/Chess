@@ -10,7 +10,7 @@ import chesspieces.*;
 public class Chess {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	static Node[][] board = new Node[8][8];
+	static Node[] board = new Node[64];
 	static ArrayList<String> moveHistory = new ArrayList<String>();
 	
 	// Given player's king. Check if enemy is attacking.
@@ -26,9 +26,9 @@ public class Chess {
 	public static boolean kingIsChecked() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				if (board[i][j].gridEmpty == false) {
-					if (board[i][j].piece instanceof King) {
-						String player = board[i][j].piece.player;
+				if (board[i*8+j].gridEmpty == false) {
+					if (board[i*8+j].piece instanceof King) {
+						String player = board[i*8+j].piece.player;
 						if (attacked(i, j, player)) {
 							return true;
 						}
@@ -53,8 +53,8 @@ public class Chess {
 				System.exit(0);
 			} else if (splitted.length == 2) {
 				// 2 inputs
-				int[] initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board, moveHistory)==false) {
+				int initialIndex = Piece.getIndex(splitted[0]);
+				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 					getNewMove("w");
 				}
 			} else {
@@ -75,8 +75,8 @@ public class Chess {
 				System.exit(0);
 			} else if (splitted.length == 2) {
 				// 2 inputs
-				int[] initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board, moveHistory)==false) {
+				int initialIndex = Piece.getIndex(splitted[0]);
+				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
 				}
 			} else {
@@ -105,8 +105,8 @@ public class Chess {
 			return;
 		} else if (splitted.length == 2) {
 			// 2 inputs
-			int[] initialIndex = Piece.getIndex(splitted[0]);
-			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "w", board,moveHistory)==false) {
+			int initialIndex = Piece.getIndex(splitted[0]);
+			if(board[initialIndex].piece.move(splitted[1], "w", board,moveHistory)==false) {
 				getNewMove("w");
 			}
 		} else {
@@ -132,8 +132,8 @@ public class Chess {
 			System.out.println("White wins");
 			return;
 		} else if (splitted.length == 2) {
-			int[] initialIndex = Piece.getIndex(splitted[0]);
-			if(board[initialIndex[0]][initialIndex[1]].piece.move(splitted[1], "b", board,moveHistory)==false) {
+			int initialIndex = Piece.getIndex(splitted[0]);
+			if(board[initialIndex].piece.move(splitted[1], "b", board,moveHistory)==false) {
 				getNewMove("b");
 			}
 		} else {

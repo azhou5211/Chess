@@ -12,18 +12,22 @@ public class Pawn extends Piece {
 	
 	boolean firstMove;
 	
-	public Pawn(String player, int row, int col) {
-		super(player,row,col);
+	public Pawn(String player, int startIndex) {
+		super(player,startIndex);
 		this.firstMove = true;
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
-		// Current position. row = this.row. col = this.col
-		int row = this.row;
-		int col = this.col;
-		int[] endIndex = Piece.getIndex(end);
-		boolean checkEndIndex = false;
+	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
+		if(!board[this.startIndex].piece.player.equals(player)) {
+			return false;
+		}
 		
 		
 		return false;

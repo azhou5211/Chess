@@ -12,13 +12,22 @@ public class King extends Piece {
 
 	boolean firstMove;
 
-	public King(String player,int row, int col) {
-		super(player,row,col);
+	public King(String player, int startIndex) {
+		super(player, startIndex);
 		this.firstMove = true;
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
+	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
+		if(!board[this.startIndex].piece.player.equals(player)) {
+			return false;
+		}
 		/**
 		 * Castling Rules
 		 * Your king has been moved earlier in the game. 

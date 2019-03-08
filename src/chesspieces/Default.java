@@ -10,12 +10,18 @@ import java.util.ArrayList;
 
 public class Default extends Piece {
 	
-	public Default(String player,int row, int col) {
-		super(player,row,col);
+	public Default(String player, int startIndex) {
+		super(player,startIndex);
 	}
 
 	@Override
-	public boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory) {
+	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
 		return false;
 	}
 	

@@ -10,29 +10,35 @@ import java.util.ArrayList;
 
 public abstract class Piece {
 	public String player;
-	public int row;
-	public int col;
-	public abstract boolean move(String end, String player, Node[][] board, ArrayList<String> moveHistory);
-	//public abstract boolean checkedKing(String initial);
+	public int startIndex;
+	public abstract boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory);
+	public abstract ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board);
 	
-	public static int[] getIndex(String FileRank) {
-		int[] index = new int[2];
+	public static int getIndex(String FileRank) {
+		int index;
 		char File = FileRank.charAt(0);
 		char Rank = FileRank.charAt(1);
-		index[1] = File - 'a';
-		index[0] = 8 - (Rank - '0');
+		int col = File - 'a';
+		int row = 8 - (Rank - '0');
+		index = 8*row + col;
 		return index;
 	}
 	
-	public static void executeMove(Node[][] board, int[] endIndex, int row, int col, ArrayList<String> moveHistory) {
-		board[endIndex[0]][endIndex[1]].gridEmpty = false;
-		board[row][col].gridEmpty = true;
-		board[endIndex[0]][endIndex[1]].piece = board[row][col].piece;
-		board[endIndex[0]][endIndex[1]].piece.row = endIndex[0];
-		board[endIndex[0]][endIndex[1]].piece.col = endIndex[1];
-		board[row][col].piece = new Default("null",-1,-1);
-		String history = Integer.toString(row) + Integer.toString(col) +  " " + Integer.toString(endIndex[0]) + Integer.toString(endIndex[1]);
+	public static void executeMove(Node[] board, int startIndex, int endIndex, ArrayList<String> moveHistory) {
+		board[endIndex].gridEmpty = false;
+		board[startIndex].gridEmpty = true;
+		board[endIndex].piece = board[startIndex].piece;
+		board[endIndex].piece.startIndex = endIndex;
+		board[startIndex].piece = new Default("null",-1);
+		String history = Integer.toString(startIndex) + " " + Integer.toString(endIndex);
 		moveHistory.add(history);
+	}
+	
+	public static String convertRowCol(int index) {
+		int row = (int) Math.floor(index/8);
+		int col = index%8;
+		String ans = Integer.toString(row) + " " + Integer.toString(col);
+		return ans;
 	}
 	
 	public static String getEnemyPlayer(String player) {
@@ -43,9 +49,8 @@ public abstract class Piece {
 		}
 	}
 	
-	public Piece(String player, int row, int col) {
+	public Piece(String player, int startIndex) {
 		this.player = player;
-		this.row = row;
-		this.col = col;
+		this.startIndex = startIndex;
 	}
 }
