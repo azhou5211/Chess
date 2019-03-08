@@ -143,35 +143,55 @@ public class Pawn extends Piece {
 		enpassant = false;
 		
 		
+		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		if(this.firstMove) {
 			if(player.equals("w")) {
-				if(this.startIndex == endIndex+16 && board[endIndex].gridEmpty) {
-					if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
-						Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
-						this.firstMove = false;
-						return true;
+				if(board[this.startIndex-16].gridEmpty) {
+					if(!Piece.executeMoveKingChecked(board, this.startIndex, this.startIndex-16, player)) {
+						moveList.add(this.startIndex-16);
 					}
 				}
 			} else {
-				if(this.startIndex == endIndex-16 && board[endIndex].gridEmpty) {
-					if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
-						Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
-						this.firstMove = false;
-						return true;
+				if(board[this.startIndex+16].gridEmpty) {
+					if(!Piece.executeMoveKingChecked(board, this.startIndex, this.startIndex+16, player)) {
+						moveList.add(this.startIndex+16);
 					}
 				}
 			}
 		}
 		
+		// Checks if move is en passant
+		int row = (int) Math.floor(startIndex/8);
+		int col = startIndex%8;
+		if(player.equals("w")) {
+			if((this.startIndex-7==endIndex && row-1>=0 && col+1<8) || (this.startIndex-9==endIndex && row-1>=0 && col-1>=0)) {
+				if(board[endIndex].gridEmpty) {
+					enpassant = true;
+				}
+			}
+		} else {
+			if((this.startIndex+7==endIndex && row+1<8 && col-1>=0) || (this.startIndex+9==endIndex && row+1<8 && col+1<8)) {
+				if(board[endIndex].gridEmpty) {
+					enpassant = true;
+				}
+			}
+		}
 		
-		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		//Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
 				// TODO also check if pawn is promo
-				// also need to check if the move is a normal move or an en passant
 				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
 				this.firstMove = false;
+				if(enpassant) {
+					if(player.equals("w")) {
+						board[endIndex+8].piece = new Default("null",-1);
+						board[endIndex+8].gridEmpty = true;
+					} else {
+						board[endIndex-8].piece = new Default("null",-1);
+						board[endIndex-8].gridEmpty = true;
+					}
+				}
 				return true;
 			}
 		}
