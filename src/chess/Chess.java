@@ -12,6 +12,8 @@ public class Chess {
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static Node[] board = new Node[64];
 	static ArrayList<String> moveHistory = new ArrayList<String>();
+	public static Piece whiteKing;
+	public static Piece blackKing;
 	
 	// Given player's king. Check if enemy is attacking.
 	public static boolean attacked(int i, int j, String player) {
@@ -147,6 +149,8 @@ public class Chess {
 	public static void main(String[] args) throws IOException {
 		// Node[][] board = new Node[8][8];
 		Node.initialize(board);
+		whiteKing = board[7*8+4].piece;
+		blackKing = board[0*8+4].piece;
 		Node.print(board);
 		whiteMove();
 	}

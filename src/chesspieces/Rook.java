@@ -9,12 +9,8 @@ import java.util.ArrayList;
  */
 
 public class Rook extends Piece {
-
-	boolean firstMove;
-
 	public Rook(String player, int startIndex) {
 		super(player, startIndex);
-		this.firstMove = true;
 	}
 	
 	@Override
@@ -82,8 +78,11 @@ public class Rook extends Piece {
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		int endIndex = Piece.getIndex(end);
 		if(moveList.contains(endIndex)) {
-			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
-			return true;
+			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
+				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
+				this.firstMove = false;
+				return true;
+			}
 		}
 		return false;
 	}

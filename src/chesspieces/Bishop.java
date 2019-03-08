@@ -91,11 +91,12 @@ public class Bishop extends Piece {
 			return false;
 		}
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
-		System.out.println(moveList);
 		int endIndex = Piece.getIndex(end);
 		if(moveList.contains(endIndex)) {
-			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
-			return true;
+			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
+				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
+				return true;
+			}
 		}
 		return false;
 	}

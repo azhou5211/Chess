@@ -44,7 +44,7 @@ public class Node {
 		board[0*8+7].piece = new Rook("b",0*8+7);
 		board[7*8+0].piece = new Rook("w",7*8+0);
 		board[7*8+7].piece = new Rook("w",7*8+7);
-
+		
 		board[0*8+1].piece = new Knight("b",0*8+1);
 		board[0*8+6].piece = new Knight("b",0*8+6);
 		board[7*8+1].piece = new Knight("w",7*8+1);
@@ -54,13 +54,12 @@ public class Node {
 		board[0*8+5].piece = new Bishop("b",0*8+5);
 		board[7*8+2].piece = new Bishop("w",7*8+2);
 		board[7*8+5].piece = new Bishop("w",7*8+5);
-
+		 
 		board[0*8+3].piece = new Queen("b",0*8+3);
 		board[7*8+3].piece = new Queen("w",7*8+3);
-
+		
 		board[0*8+4].piece = new King("b",0*8+4);
 		board[7*8+4].piece = new King("w",7*8+4);
-		
 		//board[5][5].piece = new Pawn("b",5,5);
 		//board[5][5].gridEmpty = false;
 		//board[5][5].piece = new Rook("w",5,5);
@@ -73,6 +72,12 @@ public class Node {
 		//board[4*8+3].gridEmpty = false;
 		//board[4*8+3].piece = new Queen("w",4*8+3);
 		//board[4*8+3].gridEmpty = false;
+		/*
+		board[3*8+3].piece = new King("b",3*8+3);
+		board[3*8+3].gridEmpty = false;
+		board[4*8+3].piece = new Pawn("w",4*8+3);
+		board[4*8+3].gridEmpty = false;
+		*/
 		
 	}
 

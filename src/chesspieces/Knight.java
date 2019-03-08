@@ -25,11 +25,11 @@ public class Knight extends Piece {
 		int tempIndex3 = startIndex - 15; // up right
 		int tempIndex4 = startIndex - 6; // right up
 		int tempIndex5 = startIndex + 10; // right down
-		int tempIndex6 = startIndex +17; //down right
+		int tempIndex6 = startIndex +17; // down right
 		int tempIndex7 = startIndex +15; // down left
 		int tempIndex8 = startIndex + 6; // left down
 		
-		if(tempIndex1 >=0) {
+		if(tempIndex1 >= 0) {
 			if(board[tempIndex1].gridEmpty) {
 				moveList.add(tempIndex1);
 			} else {
@@ -39,7 +39,7 @@ public class Knight extends Piece {
 			}
 		}
 		
-		if(tempIndex2 >=0) {
+		if(tempIndex2 >= 0) {
 			if(board[tempIndex2].gridEmpty) {
 				moveList.add(tempIndex2);
 			} else {
@@ -49,7 +49,7 @@ public class Knight extends Piece {
 			}
 		}
 		
-		if(tempIndex3 >=0) {
+		if(tempIndex3 >= 0) {
 			if(board[tempIndex3].gridEmpty) {
 				moveList.add(tempIndex3);
 			} else {
@@ -59,7 +59,7 @@ public class Knight extends Piece {
 			}
 		}
 		
-		if(tempIndex4 >=0) {
+		if(tempIndex4 >= 0) {
 			if(board[tempIndex4].gridEmpty) {
 				moveList.add(tempIndex4);
 			} else {
@@ -119,8 +119,10 @@ public class Knight extends Piece {
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		int endIndex = Piece.getIndex(end);
 		if(moveList.contains(endIndex)) {
-			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
-			return true;
+			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
+				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
+				return true;
+			}
 		}
 		//System.out.println(moveList);
 		return false;
