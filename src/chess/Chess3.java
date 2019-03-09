@@ -13,7 +13,7 @@ import chesspieces.*;
  * 
  */
 
-public class Chess {
+public class Chess3 {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static Node[] board = new Node[64];
@@ -42,26 +42,8 @@ public class Chess {
 				// 3 inputs. Either draw or pawn promotion
 				if (splitted[2].equals("draw")) {
 					// TODO Offering draw
-					int initialIndex = Piece.getIndex(splitted[0]);
-					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
-						getNewMove("w");
-					}
 				} else {
-					int initialIndex = Piece.getIndex(splitted[0]);
-					int endIndex = Piece.getIndex(splitted[1]);
-					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
-						getNewMove("w");
-					} else {
-						if(splitted[2].equals("R")) {
-							board[endIndex].piece = new Rook("w",endIndex);
-						} else if(splitted[2].equals("N")) {
-							board[endIndex].piece = new Knight("w",endIndex);
-						} else if(splitted[2].equals("B")) {
-							board[endIndex].piece = new Bishop("w",endIndex);
-						} else if(splitted[2].equals("Q")) {
-							board[endIndex].piece = new Queen("w",endIndex);
-						}
-					}
+					// TODO Pawn promotion
 				}
 			}
 		} else {
@@ -75,33 +57,15 @@ public class Chess {
 			} else if (splitted.length == 2) {
 				// 2 inputs
 				int initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex].piece.move(splitted[1], "b", board,moveHistory)==false) {
+				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
 				}
 			} else {
 				// 3 inputs. Either draw or pawn promotion
 				if (splitted[2].equals("draw")) {
 					// TODO Offering draw
-					int initialIndex = Piece.getIndex(splitted[0]);
-					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
-						getNewMove("b");
-					}
 				} else {
-					int initialIndex = Piece.getIndex(splitted[0]);
-					int endIndex = Piece.getIndex(splitted[1]);
-					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
-						getNewMove("b");
-					} else {
-						if(splitted[2].equals("R")) {
-							board[endIndex].piece = new Rook("b",endIndex);
-						} else if(splitted[2].equals("N")) {
-							board[endIndex].piece = new Knight("b",endIndex);
-						} else if(splitted[2].equals("B")) {
-							board[endIndex].piece = new Bishop("b",endIndex);
-						} else if(splitted[2].equals("Q")) {
-							board[endIndex].piece = new Queen("b",endIndex);
-						}
-					}
+					// TODO Pawn promotion
 				}
 			}
 		}
@@ -130,26 +94,8 @@ public class Chess {
 			// 3 inputs. Either draw or pawn promotion
 			if (splitted[2].equals("draw")) {
 				// TODO Offering draw
-				int initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
-					getNewMove("w");
-				}
 			} else {
-				int initialIndex = Piece.getIndex(splitted[0]);
-				int endIndex = Piece.getIndex(splitted[1]);
-				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
-					getNewMove("w");
-				} else {
-					if(splitted[2].equals("R")) {
-						board[endIndex].piece = new Rook("w",endIndex);
-					} else if(splitted[2].equals("N")) {
-						board[endIndex].piece = new Knight("w",endIndex);
-					} else if(splitted[2].equals("B")) {
-						board[endIndex].piece = new Bishop("w",endIndex);
-					} else if(splitted[2].equals("Q")) {
-						board[endIndex].piece = new Queen("w",endIndex);
-					}
-				}
+				// TODO Pawn promotion
 			}
 		}
 		System.out.println("");
@@ -172,30 +118,7 @@ public class Chess {
 				getNewMove("b");
 			}
 		} else {
-			// 3 inputs. Either draw or pawn promotion
-			if (splitted[2].equals("draw")) {
-				// TODO Offering draw
-				int initialIndex = Piece.getIndex(splitted[0]);
-				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
-					getNewMove("b");
-				}
-			} else {
-				int initialIndex = Piece.getIndex(splitted[0]);
-				int endIndex = Piece.getIndex(splitted[1]);
-				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
-					getNewMove("b");
-				} else {
-					if(splitted[2].equals("R")) {
-						board[endIndex].piece = new Rook("b",endIndex);
-					} else if(splitted[2].equals("N")) {
-						board[endIndex].piece = new Knight("b",endIndex);
-					} else if(splitted[2].equals("B")) {
-						board[endIndex].piece = new Bishop("b",endIndex);
-					} else if(splitted[2].equals("Q")) {
-						board[endIndex].piece = new Queen("b",endIndex);
-					}
-				}
-			}
+
 		}
 		System.out.println("");
 		Node.print(board);

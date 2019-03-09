@@ -42,6 +42,7 @@ public class Pawn extends Piece {
 		int tempIndex1;
 		int tempIndex2;
 		int tempIndex3;
+		
 		if(player.equals("w")) {
 			tempIndex1 = startIndex - 8; // up
 			tempIndex2 = startIndex - 7; // up right
@@ -177,7 +178,9 @@ public class Pawn extends Piece {
 			}
 		}
 		
-		Piece.RowColPrintList(moveList);
+		//Piece.RowColPrintList(moveList);
+		//System.out.println(Piece.convertRowCol(startIndex));
+		//System.out.println(Piece.convertRowCol(endIndex));
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
 				// TODO also check if pawn is promo
@@ -192,6 +195,10 @@ public class Pawn extends Piece {
 						board[endIndex-8].gridEmpty = true;
 					}
 				}
+				if((endIndex>=0 && endIndex<8) || (endIndex>=56 && endIndex<64)) {
+					board[endIndex].piece = new Queen(player,endIndex);
+				}
+				
 				return true;
 			}
 		}

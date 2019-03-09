@@ -23,12 +23,13 @@ public abstract class Piece {
 	
 	public static boolean executeMoveKingChecked(Node[] board, int startIndex, int endIndex, String player) {
 		Piece temp = board[startIndex].piece;
+		boolean endIndexEmpty = board[endIndex].gridEmpty;
 		Piece temp2 = board[endIndex].piece;
 		
 		board[startIndex].gridEmpty = true;
 		board[endIndex].gridEmpty = false;
 		board[endIndex].piece = temp;
-		board[endIndex].piece.startIndex = endIndex;
+		temp.startIndex = endIndex;
 		board[startIndex].piece = new Default("null",-1);
 		
 		boolean kingChecked = false;
@@ -45,9 +46,9 @@ public abstract class Piece {
 		}
 		
 		board[startIndex].gridEmpty = false;
-		board[endIndex].gridEmpty = true;
+		board[endIndex].gridEmpty = endIndexEmpty;
 		board[startIndex].piece = temp;
-		board[startIndex].piece.startIndex = startIndex;
+		temp.startIndex = startIndex;
 		board[endIndex].piece = temp2;
 		
 		return kingChecked;

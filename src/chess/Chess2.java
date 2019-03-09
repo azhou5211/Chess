@@ -13,7 +13,7 @@ import chesspieces.*;
  * 
  */
 
-public class Chess {
+public class Chess2 {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static Node[] board = new Node[64];
@@ -52,13 +52,13 @@ public class Chess {
 					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 						getNewMove("w");
 					} else {
-						if(splitted[2].equals("R")) {
+						if(splitted[0].equals("R")) {
 							board[endIndex].piece = new Rook("w",endIndex);
-						} else if(splitted[2].equals("N")) {
+						} else if(splitted[0].equals("N")) {
 							board[endIndex].piece = new Knight("w",endIndex);
-						} else if(splitted[2].equals("B")) {
+						} else if(splitted[0].equals("B")) {
 							board[endIndex].piece = new Bishop("w",endIndex);
-						} else if(splitted[2].equals("Q")) {
+						} else if(splitted[0].equals("Q")) {
 							board[endIndex].piece = new Queen("w",endIndex);
 						}
 					}
@@ -92,13 +92,13 @@ public class Chess {
 					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 						getNewMove("b");
 					} else {
-						if(splitted[2].equals("R")) {
+						if(splitted[0].equals("R")) {
 							board[endIndex].piece = new Rook("b",endIndex);
-						} else if(splitted[2].equals("N")) {
+						} else if(splitted[0].equals("N")) {
 							board[endIndex].piece = new Knight("b",endIndex);
-						} else if(splitted[2].equals("B")) {
+						} else if(splitted[0].equals("B")) {
 							board[endIndex].piece = new Bishop("b",endIndex);
-						} else if(splitted[2].equals("Q")) {
+						} else if(splitted[0].equals("Q")) {
 							board[endIndex].piece = new Queen("b",endIndex);
 						}
 					}
@@ -140,13 +140,13 @@ public class Chess {
 				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 					getNewMove("w");
 				} else {
-					if(splitted[2].equals("R")) {
+					if(splitted[0].equals("R")) {
 						board[endIndex].piece = new Rook("w",endIndex);
-					} else if(splitted[2].equals("N")) {
+					} else if(splitted[0].equals("N")) {
 						board[endIndex].piece = new Knight("w",endIndex);
-					} else if(splitted[2].equals("B")) {
+					} else if(splitted[0].equals("B")) {
 						board[endIndex].piece = new Bishop("w",endIndex);
-					} else if(splitted[2].equals("Q")) {
+					} else if(splitted[0].equals("Q")) {
 						board[endIndex].piece = new Queen("w",endIndex);
 					}
 				}
@@ -185,13 +185,13 @@ public class Chess {
 				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
 				} else {
-					if(splitted[2].equals("R")) {
+					if(splitted[0].equals("R")) {
 						board[endIndex].piece = new Rook("b",endIndex);
-					} else if(splitted[2].equals("N")) {
+					} else if(splitted[0].equals("N")) {
 						board[endIndex].piece = new Knight("b",endIndex);
-					} else if(splitted[2].equals("B")) {
+					} else if(splitted[0].equals("B")) {
 						board[endIndex].piece = new Bishop("b",endIndex);
-					} else if(splitted[2].equals("Q")) {
+					} else if(splitted[0].equals("Q")) {
 						board[endIndex].piece = new Queen("b",endIndex);
 					}
 				}
