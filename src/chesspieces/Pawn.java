@@ -73,7 +73,7 @@ public class Pawn extends Piece {
 			// up left
 			if(tempIndex3 >= 0 && row-1>=0 && col-1>=0) {
 				if(board[tempIndex3].gridEmpty) {
-					if(board[startIndex-1].piece instanceof Pawn  && board[startIndex+1].piece.player.equals(enemyPlayer)) {
+					if(board[startIndex-1].piece instanceof Pawn  && board[startIndex-1].piece.player.equals(enemyPlayer)) {
 						String previousMove = Chess.moveHistory.get(Chess.moveHistory.size()-1);
 						if(previousMoveWasPawn(previousMove,startIndex-1)) {
 							moveList.add(tempIndex3);
@@ -117,7 +117,7 @@ public class Pawn extends Piece {
 			// down left
 			if(tempIndex3 <64 && row+1<8 && col-1>=0) {
 				if(board[tempIndex3].gridEmpty) {
-					if(board[startIndex-1].piece instanceof Pawn  && board[startIndex+1].piece.player.equals(enemyPlayer)) {
+					if(board[startIndex-1].piece instanceof Pawn  && board[startIndex-1].piece.player.equals(enemyPlayer)) {
 						String previousMove = Chess.moveHistory.get(Chess.moveHistory.size()-1);
 						if(previousMoveWasPawn(previousMove,startIndex-1)) {
 							moveList.add(tempIndex3);
@@ -177,7 +177,7 @@ public class Pawn extends Piece {
 			}
 		}
 		
-		//Piece.RowColPrintList(moveList);
+		Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
 				// TODO also check if pawn is promo

@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 import chesspieces.*;
 
+/**
+ * 
+ * @author Andrew Zhou, Bang An
+ * 
+ */
+
 public class Chess {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
