@@ -72,7 +72,6 @@ public class Knight extends Piece {
 		}
 		
 		if(tempIndex5 < 64 && row+1<8 && col+2<8) {
-			System.out.println("test");
 			if(board[tempIndex5].gridEmpty) {
 				moveList.add(tempIndex5);
 			} else {

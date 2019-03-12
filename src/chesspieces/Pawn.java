@@ -43,6 +43,25 @@ public class Pawn extends Piece {
 		int tempIndex2;
 		int tempIndex3;
 		
+		if(board[startIndex].piece.firstMove) {
+			if(player.equals("w")) {
+				if(board[startIndex-16].gridEmpty) {
+					if(!Piece.executeMoveKingChecked(board, startIndex, startIndex-16, player)) {
+						moveList.add(startIndex-16);
+					}
+				}
+			} else {
+				if(board[startIndex+16].gridEmpty) {
+					if(!Piece.executeMoveKingChecked(board, startIndex, startIndex+16, player)) {
+						moveList.add(startIndex+16);
+					}
+				}
+			}
+		}
+		
+		
+		
+		
 		if(player.equals("w")) {
 			tempIndex1 = startIndex - 8; // up
 			tempIndex2 = startIndex - 7; // up right
@@ -145,6 +164,7 @@ public class Pawn extends Piece {
 		
 		
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
+		/*
 		if(this.firstMove) {
 			if(player.equals("w")) {
 				if(board[this.startIndex-16].gridEmpty) {
@@ -160,6 +180,7 @@ public class Pawn extends Piece {
 				}
 			}
 		}
+		*/
 		
 		// Checks if move is en passant
 		int row = (int) Math.floor(startIndex/8);

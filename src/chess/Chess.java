@@ -21,6 +21,22 @@ public class Chess {
 	public static Piece whiteKing;
 	public static Piece blackKing;
 
+	private static boolean isCheckmate(String player) {
+		for(int i=0;i<64;i++) {
+			if(!board[i].gridEmpty) {
+				if(board[i].piece.player.equals(player)) {
+					ArrayList<Integer> moveList = board[i].piece.getMoveList(board[i].piece.startIndex, player, board);
+					for(int move: moveList) {
+						if(!Piece.executeMoveKingChecked(board, board[i].piece.startIndex, move, player)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
 	public static void getNewMove(String player) throws IOException {
 		System.out.println("Illegal Move, try again");
 		
@@ -154,6 +170,19 @@ public class Chess {
 		}
 		System.out.println("");
 		// TODO Check for king is checked
+		//System.out.println("whiteKing Index: " + whiteKing.startIndex);
+		if(King.isPositionChecked(board, blackKing.startIndex, "b")) {
+			// Check for checkmate
+			if(isCheckmate("b")) {
+				System.out.println("");
+				System.out.println("White wins");
+				System.exit(0);
+			} else {
+				System.out.println("check");
+			}
+		} else {
+			// check for stalemate
+		}
 		Node.print(board);
 		blackMove();
 	}
@@ -198,8 +227,20 @@ public class Chess {
 				}
 			}
 		}
-		System.out.println("");
 		// TODO Check for king is checked
+		if(King.isPositionChecked(board, whiteKing.startIndex, "w")) {
+			// Check for checkmate
+			if(isCheckmate("w")) {
+				//System.out.println("");
+				System.out.println("Black wins");
+				System.exit(0);
+			} else {
+				System.out.println("check");
+			}
+		} else {
+			// check for stalemate
+		}
+		System.out.println("");
 		Node.print(board);
 		whiteMove();
 	}
