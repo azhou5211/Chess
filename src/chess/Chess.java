@@ -20,6 +20,8 @@ public class Chess {
 	public static ArrayList<String> moveHistory = new ArrayList<String>();
 	public static Piece whiteKing;
 	public static Piece blackKing;
+	private static boolean whiteChecked;
+	private static boolean blackChecked;
 
 	private static boolean isCheckmate(String player) {
 		for(int i=0;i<64;i++) {
@@ -41,6 +43,9 @@ public class Chess {
 		System.out.println("Illegal Move, try again");
 		
 		if(player.equals("w")) {
+			if(whiteChecked) {
+				System.out.print("Checked ");
+			}
 			System.out.print("White's move: ");
 			String next_move = reader.readLine();
 			String[] splitted = next_move.split("\\s+");
@@ -61,6 +66,9 @@ public class Chess {
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 						getNewMove("w");
+					} else {
+						System.out.println("draw");
+						System.exit(0);
 					}
 				} else {
 					int initialIndex = Piece.getIndex(splitted[0]);
@@ -81,6 +89,9 @@ public class Chess {
 				}
 			}
 		} else {
+			if(blackChecked) {
+				System.out.print("Checked ");
+			}
 			System.out.print("Black's move: ");
 			String next_move = reader.readLine();
 			String[] splitted = next_move.split("\\s+");
@@ -101,6 +112,9 @@ public class Chess {
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 						getNewMove("b");
+					} else {
+						System.out.println("draw");
+						System.exit(0);
 					}
 				} else {
 					int initialIndex = Piece.getIndex(splitted[0]);
@@ -125,6 +139,9 @@ public class Chess {
 	
 	public static void whiteMove() throws IOException {
 		System.out.println("");
+		if(whiteChecked) {
+			System.out.print("Checked ");
+		}
 		System.out.print("White's move: ");
 		String next_move = reader.readLine();
 		String[] splitted = next_move.split("\\s+");
@@ -149,6 +166,9 @@ public class Chess {
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 					getNewMove("w");
+				} else {
+					System.out.println("draw");
+					System.exit(0);
 				}
 			} else {
 				int initialIndex = Piece.getIndex(splitted[0]);
@@ -168,27 +188,37 @@ public class Chess {
 				}
 			}
 		}
-		System.out.println("");
-		// TODO Check for king is checked
-		//System.out.println("whiteKing Index: " + whiteKing.startIndex);
+		//System.out.println("");
+		blackChecked = false;
 		if(King.isPositionChecked(board, blackKing.startIndex, "b")) {
 			// Check for checkmate
 			if(isCheckmate("b")) {
-				System.out.println("");
+				//System.out.println("");
+				System.out.println("Checkmate");
 				System.out.println("White wins");
 				System.exit(0);
 			} else {
-				System.out.println("check");
+				blackChecked = true;
+				//System.out.println("check ");
 			}
 		} else {
 			// check for stalemate
+			if(isCheckmate("b")) {
+				System.out.println("Stalemate");
+				System.out.println("draw");
+				System.exit(0);
+			}
 		}
+		System.out.println("");
 		Node.print(board);
 		blackMove();
 	}
 
 	public static void blackMove() throws IOException {
 		System.out.println("");
+		if(blackChecked) {
+			System.out.print("Checked ");
+		}
 		System.out.print("Black's move: ");
 		String next_move = reader.readLine();
 		String[] splitted = next_move.split("\\s+");
@@ -208,6 +238,9 @@ public class Chess {
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
+				} else {
+					System.out.println("draw");
+					System.exit(0);
 				}
 			} else {
 				int initialIndex = Piece.getIndex(splitted[0]);
@@ -228,17 +261,25 @@ public class Chess {
 			}
 		}
 		// TODO Check for king is checked
+		whiteChecked = false;
 		if(King.isPositionChecked(board, whiteKing.startIndex, "w")) {
 			// Check for checkmate
 			if(isCheckmate("w")) {
 				//System.out.println("");
+				System.out.println("Checkmate");
 				System.out.println("Black wins");
 				System.exit(0);
 			} else {
-				System.out.println("check");
+				whiteChecked = true;
+				//System.out.println("Check ");
 			}
 		} else {
 			// check for stalemate
+			if(isCheckmate("w")) {
+				System.out.println("Stalemate");
+				System.out.println("draw");
+				System.exit(0);
+			}
 		}
 		System.out.println("");
 		Node.print(board);
@@ -251,6 +292,8 @@ public class Chess {
 		whiteKing = board[7*8+4].piece;
 		//whiteKing = board[3*8+2].piece;
 		blackKing = board[0*8+4].piece;
+		whiteChecked = false;
+		blackChecked = false;
 		Node.print(board);
 		whiteMove();
 	}
