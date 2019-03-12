@@ -40,7 +40,7 @@ public class Chess {
 				}
 			} else {
 				// 3 inputs. Either draw or pawn promotion
-				if (splitted[2].equals("draw")) {
+				if (splitted[2].equals("draw?")) {
 					// TODO Offering draw
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
@@ -80,7 +80,7 @@ public class Chess {
 				}
 			} else {
 				// 3 inputs. Either draw or pawn promotion
-				if (splitted[2].equals("draw")) {
+				if (splitted[2].equals("draw?")) {
 					// TODO Offering draw
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
@@ -128,7 +128,7 @@ public class Chess {
 			}
 		} else {
 			// 3 inputs. Either draw or pawn promotion
-			if (splitted[2].equals("draw")) {
+			if (splitted[2].equals("draw?")) {
 				// TODO Offering draw
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
@@ -153,6 +153,7 @@ public class Chess {
 			}
 		}
 		System.out.println("");
+		// TODO Check for king is checked
 		Node.print(board);
 		blackMove();
 	}
@@ -173,7 +174,7 @@ public class Chess {
 			}
 		} else {
 			// 3 inputs. Either draw or pawn promotion
-			if (splitted[2].equals("draw")) {
+			if (splitted[2].equals("draw?")) {
 				// TODO Offering draw
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
@@ -198,6 +199,7 @@ public class Chess {
 			}
 		}
 		System.out.println("");
+		// TODO Check for king is checked
 		Node.print(board);
 		whiteMove();
 	}
