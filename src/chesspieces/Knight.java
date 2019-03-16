@@ -3,17 +3,31 @@ package chesspieces;
 import java.util.ArrayList;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * The Knight piece for chess.
+ * This class allows moving the Knight and getting a list of all available moves for a particular Knight.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public class Knight extends Piece {
 
+	/**
+	 * Creates a new Knight
+	 * @param player. The player which the Knight belongs to
+	 * @param startIndex. The initial starting location of the Knight
+	 */
 	public Knight(String player, int startIndex) {
 		super(player, startIndex);
 	}
 
+	/**
+	 * Implementing the abstract method, getMoveList, from Piece.
+	 * @param startIndex. Where the piece initially is located
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @return ArrayList of all indices where the Knight piece can move
+	 */
 	@Override
 	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
 		ArrayList<Integer> moveList = new ArrayList<Integer>();
@@ -113,6 +127,15 @@ public class Knight extends Piece {
 		return moveList;
 	}
 	
+	/**
+	 * Implementing the abstract method, move, from Piece.
+	 * @param end. User input to where the move should go
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @param moveHistory. An ArrayList of previous moves
+	 * @return true, if the move was successfully executed.
+	 * @return false, if the move was unsuccessfully executed (illegal move).
+	 */
 	@Override
 	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
 		if(!board[this.startIndex].piece.player.equals(player)) {
@@ -120,17 +143,18 @@ public class Knight extends Piece {
 		}
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
 		int endIndex = Piece.getIndex(end);
-		//Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
 				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
 				return true;
 			}
 		}
-		//System.out.println(moveList);
 		return false;
 	}
 
+	/**
+	 * @return the string format for which the Knight piece is printed
+	 */
 	public String toString() {
 		return this.player + "N ";
 	}

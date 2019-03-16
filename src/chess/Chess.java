@@ -8,21 +8,47 @@ import java.util.ArrayList;
 import chesspieces.*;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * This is the main class. Running this class will bootup the chess game, and alternate between white and black turns.
+ * This class also checks for stalemate and checkmate.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public class Chess {
 
+	/**
+	 *  global reader for input
+	 */
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
+	/**
+	 *  global board
+	 */
 	static Node[] board = new Node[64];
+	
+	/**
+	 *  global arraylist that keeps track of all moves
+	 */
 	public static ArrayList<String> moveHistory = new ArrayList<String>();
+	
+	/**
+	 *  global white king and black king pieces
+	 */
 	public static Piece whiteKing;
 	public static Piece blackKing;
+	
+	/**
+	 *  global booleans to keep track if kings are checked
+	 */
 	private static boolean whiteChecked;
 	private static boolean blackChecked;
 
+	/**
+	 * 
+	 * @param which player it is
+	 * @return True if there are no more moves left
+	 */
 	private static boolean isCheckmate(String player) {
 		for(int i=0;i<64;i++) {
 			if(!board[i].gridEmpty) {
@@ -39,6 +65,11 @@ public class Chess {
 		return true;
 	}
 	
+	/**
+	 * This method print's Illegal Move, try again, and asks for new input.
+	 * @param player. Which player's turn it is
+	 * @throws IOException. When the reader gets IO exception.
+	 */
 	public static void getNewMove(String player) throws IOException {
 		System.out.println("Illegal Move, try again");
 		
@@ -62,7 +93,6 @@ public class Chess {
 			} else {
 				// 3 inputs. Either draw or pawn promotion
 				if (splitted[2].equals("draw?")) {
-					// TODO Offering draw
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 						getNewMove("w");
@@ -108,7 +138,6 @@ public class Chess {
 			} else {
 				// 3 inputs. Either draw or pawn promotion
 				if (splitted[2].equals("draw?")) {
-					// TODO Offering draw
 					int initialIndex = Piece.getIndex(splitted[0]);
 					if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 						getNewMove("b");
@@ -137,6 +166,11 @@ public class Chess {
 		}
 	}
 	
+	/**
+	 * This is white's turn. After a move is executed it checks if black is checkmated or stalemate.
+	 * If black is not checkmated or in stalemate, then it turns to black's turn.
+	 * @throws IOException. Reader gets bad input
+	 */
 	public static void whiteMove() throws IOException {
 		System.out.println("");
 		if(whiteChecked) {
@@ -146,9 +180,6 @@ public class Chess {
 		String next_move = reader.readLine();
 		String[] splitted = next_move.split("\\s+");
 
-		// splitted[0] is initial location
-		// splitted[1] is end location
-		// splitted[2] is either draw or pawn promotion
 		if (splitted.length == 1) {
 			// 1 input: should be resign
 			System.out.println("Black wins");
@@ -162,7 +193,6 @@ public class Chess {
 		} else {
 			// 3 inputs. Either draw or pawn promotion
 			if (splitted[2].equals("draw?")) {
-				// TODO Offering draw
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "w", board, moveHistory)==false) {
 					getNewMove("w");
@@ -188,21 +218,16 @@ public class Chess {
 				}
 			}
 		}
-		//System.out.println("");
 		blackChecked = false;
 		if(King.isPositionChecked(board, blackKing.startIndex, "b")) {
-			// Check for checkmate
 			if(isCheckmate("b")) {
-				//System.out.println("");
 				System.out.println("Checkmate");
 				System.out.println("White wins");
 				System.exit(0);
 			} else {
 				blackChecked = true;
-				//System.out.println("check ");
 			}
 		} else {
-			// check for stalemate
 			if(isCheckmate("b")) {
 				System.out.println("Stalemate");
 				System.out.println("draw");
@@ -214,6 +239,11 @@ public class Chess {
 		blackMove();
 	}
 
+	/**
+	 * Black's move. After successfully executing a move, it will check if white is checkmated or stalemate.
+	 * If not in checkmate or stalemate, it goes to white's turn.
+	 * @throws IOException. IO exception for reader
+	 */
 	public static void blackMove() throws IOException {
 		System.out.println("");
 		if(blackChecked) {
@@ -234,7 +264,6 @@ public class Chess {
 		} else {
 			// 3 inputs. Either draw or pawn promotion
 			if (splitted[2].equals("draw?")) {
-				// TODO Offering draw
 				int initialIndex = Piece.getIndex(splitted[0]);
 				if(board[initialIndex].piece.move(splitted[1], "b", board, moveHistory)==false) {
 					getNewMove("b");
@@ -260,7 +289,6 @@ public class Chess {
 				}
 			}
 		}
-		// TODO Check for king is checked
 		whiteChecked = false;
 		if(King.isPositionChecked(board, whiteKing.startIndex, "w")) {
 			// Check for checkmate
@@ -286,8 +314,12 @@ public class Chess {
 		whiteMove();
 	}
 
+	/**
+	 * Main method that starts Chess.
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
-		// Node[][] board = new Node[8][8];
 		Node.initialize(board);
 		whiteKing = board[7*8+4].piece;
 		blackKing = board[0*8+4].piece;

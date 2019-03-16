@@ -6,21 +6,59 @@ import chess.Chess;
 import chesspieces.King;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * Abstract class. It is a super class for all pieces (Pawn, Rook, Knight, Bishop, Queen, King, and Default)
+ * It provides two abstract methods which all pieces need to implement (getMoveList and move).
+ * It also provides functionality such as executing a move, converting a string to an index, calculating distance of a move, and getting the enemy player.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public abstract class Piece {
+	/**
+	 * The player to which the piece belongs to
+	 */
 	public String player;
+	
+	/**
+	 * The initial location of that piece
+	 */
 	public int startIndex;
+	
+	/**
+	 * A boolean that is true if the piece has not moved yet.
+	 */
 	public boolean firstMove;
 	
-	// Need to add another arraylist to move to check if that move is allowed when checked by enemy
-	// Also possible to check your own king by making a move..
+	/**
+	 * 
+	 * @param end. The end location to where to move should end up in.
+	 * @param player. The player to which the piece belongs to
+	 * @param board. The chess board
+	 * @param moveHistory. An ArrayList of all previously made moves
+	 * @return true if the move is executed, false otherwise
+	 */
 	public abstract boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory);
+	
+	/**
+	 * Abstract method that needs to be implemented all other piece classes.
+	 * It should return all possible moves of a particular chess piece.
+	 * @param startIndex. The initial location of the piece
+	 * @param player. The player to which the piece belongs to
+	 * @param board. The chess board
+	 * @return an ArrayList of all indices a particular chess piece can move to.
+	 */
 	public abstract ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board);
 	
+	/**
+	 * This method temporarily executes a move to check if the king is in check. If the king is in check, the move is not valid, the method returns true.
+	 * Before the method returns, the board is put back into it's original state.
+	 * @param board. The chess board
+	 * @param startIndex. The initial location of the piece
+	 * @param endIndex. The end location of the piece
+	 * @param player. The player to which the piece belongs to
+	 * @return true if the king is checked after executing such a move, false if king is not checked after executing such a move. 
+	 */
 	public static boolean executeMoveKingChecked(Node[] board, int startIndex, int endIndex, String player) {
 		Piece temp = board[startIndex].piece;
 		boolean endIndexEmpty = board[endIndex].gridEmpty;
@@ -54,6 +92,11 @@ public abstract class Piece {
 		return kingChecked;
 	}
 	
+	/**
+	 * Calculates the index of a given FileRank.
+	 * @param FileRank. String of a FileRank
+	 * @return index. the int index of a given File and Rank
+	 */
 	public static int getIndex(String FileRank) {
 		int index;
 		char File = FileRank.charAt(0);
@@ -64,6 +107,14 @@ public abstract class Piece {
 		return index;
 	}
 	
+	/**
+	 * This method executes the move on to the board. It moves the piece from an initial location to the end location.
+	 * The initial location is then set to an empty grid, and takes on a default piece.
+	 * @param board. Chess board
+	 * @param startIndex. The initial location of the piece
+	 * @param endIndex. The end location of the piece
+	 * @param moveHistory. The moveHistory of the piece. executeMove appends the startIndex and endIndex into the movehistory as a string
+	 */
 	public static void executeMove(Node[] board, int startIndex, int endIndex, ArrayList<String> moveHistory) {
 		board[endIndex].gridEmpty = false;
 		board[startIndex].gridEmpty = true;
@@ -74,6 +125,11 @@ public abstract class Piece {
 		moveHistory.add(history);
 	}
 	
+	/**
+	 * Calculates the distance between two locations. (Mainly used for en passant)
+	 * @param move. String that has two FileRanks.
+	 * @return distance. An int of the two distances between the two locations.
+	 */
 	public static int distance(String move) {
 		String[] splitted = move.split("\\s+");
 		int startIndex = Integer.parseInt(splitted[0]);
@@ -82,18 +138,16 @@ public abstract class Piece {
 		int startCol = startIndex%8;
 		int endRow = (int) Math.floor(endIndex/8);
 		int endCol = endIndex%8;
-
-		/*
-		System.out.println("start row:" + startRow);
-		System.out.println("end row:" + endRow);
-		System.out.println("start col:" + startCol);
-		System.out.println("end col:" + endCol);
-		*/
-		
 		int distance = Math.abs((endRow - startRow)) + Math.abs((endCol - startCol));
 		return distance;
 	}
 	
+	/**
+	 * Overloaded method to calculate distances.
+	 * Calculates the distance between two locations. (Mainly used for en passant)
+	 * @param move. String that has two FileRanks.
+	 * @return distance. An int of the two distances between the two locations.
+	 */
 	public static int distance(int startIndex, int endIndex) {
 		int startRow = (int) Math.floor(startIndex/8);
 		int startCol = startIndex%8;
@@ -103,6 +157,12 @@ public abstract class Piece {
 		return distance;
 	}
 	
+	/**
+	 * A method that converts an index into a row and col location.
+	 * Used to check the row and col location of a given index
+	 * @param index.
+	 * @return String format of row location and col location
+	 */
 	public static String convertRowCol(int index) {
 		int row = (int) Math.floor(index/8);
 		int col = index%8;
@@ -110,6 +170,10 @@ public abstract class Piece {
 		return ans;
 	}
 	
+	/**
+	 * @param list. ArrayList of moves in index format
+	 * Prints out the moves in row and col format. Used for debugging.
+	 */
 	public static void RowColPrintList(ArrayList<Integer> list) {
 		for(Integer index: list) {
 			int row = (int) Math.floor(index/8);
@@ -118,6 +182,10 @@ public abstract class Piece {
 		}
 	}
 	
+	/**
+	 * @param player. Current player.
+	 * @return String of the enemy player.
+	 */
 	public static String getEnemyPlayer(String player) {
 		if(player.equals("w")) {
 			return "b";
@@ -126,6 +194,12 @@ public abstract class Piece {
 		}
 	}
 	
+	/**
+	 * Creates a static type Piece object, dynamic type of (Pawn, Rook, Knight, Bishop, Queen, King, and Default).
+	 * @param player. Player to which the piece belongs to
+	 * @param startIndex. The initial location of the piece.
+	 * Sets firstMove to true for all newly constructed pieces.
+	 */
 	public Piece(String player, int startIndex) {
 		this.player = player;
 		this.startIndex = startIndex;

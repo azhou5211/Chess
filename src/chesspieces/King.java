@@ -3,16 +3,33 @@ package chesspieces;
 import java.util.ArrayList;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * The King piece for chess.
+ * This class allows moving the King and getting a list of all available moves for a particular King.
+ * This class provides a method for checking if the king is checked or not.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public class King extends Piece {
+	
+	/**
+	 * Creates a new King
+	 * @param player. The player which the Knight belongs to
+	 * @param startIndex. The initial starting location of the King
+	 */
 	public King(String player, int startIndex) {
 		super(player, startIndex);
 	}
 
+	/**
+	 * Checks at a given index, if that index will have the king under check
+	 * @param board. The chess board
+	 * @param kingIndex. The index to check if that king will be checked under
+	 * @param player. The player which the king belongs to
+	 * @return true, if that position will result in the king being in check
+	 * @return false, if that position will result in the king not being in check
+	 */
 	public static boolean isPositionChecked(Node[] board, int kingIndex, String player) {
 		String enemyPlayer = Piece.getEnemyPlayer(player);
 
@@ -232,6 +249,13 @@ public class King extends Piece {
 		return false;
 	}
 
+	/**
+	 * Implementing the abstract method, getMoveList, from Piece.
+	 * @param startIndex. Where the piece initially is located
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @return ArrayList of all indices where the King piece can move
+	 */
 	@Override
 	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
 		ArrayList<Integer> moveList = new ArrayList<Integer>();
@@ -362,20 +386,23 @@ public class King extends Piece {
 		return moveList;
 	}
 
+	/**
+	 * Implementing the abstract method, move, from Piece.
+	 * @param end. User input to where the move should go
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @param moveHistory. An ArrayList of previous moves
+	 * @return true, if the move was successfully executed.
+	 * @return false, if the move was unsuccessfully executed (illegal move).
+	 */
 	@Override
 	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
 		if (!board[this.startIndex].piece.player.equals(player)) {
 			return false;
 		}
 		int endIndex = Piece.getIndex(end);
-
-		/**
-		 * Castling Rules Your king has been moved earlier in the game. The rook that
-		 * you would castle with has been moved earlier in the game. There are pieces
-		 * standing between your king and rook. The king is in check. The king moves
-		 * through a square that is attacked by a piece of the opponent. The king would
-		 * be in check after castling.
-		 */
+		
+		// Castle
 		if (this.firstMove) {
 			if (player.equals("w")) {
 				if (endIndex == 58) {
@@ -453,7 +480,6 @@ public class King extends Piece {
 		}
 		
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
-		//Piece.RowColPrintList(moveList);
 		if(moveList.contains(endIndex)) {
 			Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
 			this.firstMove = false;
@@ -462,6 +488,9 @@ public class King extends Piece {
 		return false;
 	}
 
+	/**
+	 * @return the string format for which the Knight piece is printed
+	 */
 	public String toString() {
 		return this.player + "K ";
 	}

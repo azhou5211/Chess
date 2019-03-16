@@ -5,33 +5,53 @@ import java.util.ArrayList;
 import chess.Chess;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * The Pawn piece for chess.
+ * This class allows moving the Pawn and getting a list of all available moves for a particular Pawn.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public class Pawn extends Piece {
+	
+	/**
+	 * Creates a new Pawn
+	 * @param player. The player which the Pawn belongs to
+	 * @param startIndex. The initial starting location of the Pawn
+	 */
 	public Pawn(String player, int startIndex) {
 		super(player,startIndex);
 	}
 	
+	/**
+	 * a boolean that is set true if the move being executed is an en passant move.
+	 */
 	private static boolean enpassant;
 
+	/**
+	 * When making an en passant move, it checks if the previous move was a pawn moving two blocks forward.
+	 * @param previousMove. A string that is the previous move that was executed in the game.
+	 * @param index. The end location of where the en passant move
+	 * @return true, if the previous move was an enemy pawn moving two blocks forward
+	 * @return false, if the previous move was not an enemy pawn, or a pawn moving two blocks
+	 */
 	boolean previousMoveWasPawn(String previousMove, int index) {
 		String[] splitted = previousMove.split("\\s+");
 		int endIndex = Integer.parseInt(splitted[1]);
 		int dist = Piece.distance(previousMove);
-		/*
-		System.out.println("endindex: " + endIndex);
-		System.out.println("index: " + index);
-		System.out.println("distance: " + dist);
-		*/
 		if(index==endIndex && dist==2) {
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * Implementing the abstract method, getMoveList, from Piece.
+	 * @param startIndex. Where the piece initially is located
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @return ArrayList of all indices where the Pawn piece can move
+	 */
 	@Override
 	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
 		ArrayList<Integer> moveList = new ArrayList<Integer>();
@@ -154,6 +174,15 @@ public class Pawn extends Piece {
 		return moveList;
 	}
 	
+	/**
+	 * Implementing the abstract method, move, from Piece.
+	 * @param end. User input to where the move should go
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @param moveHistory. An ArrayList of previous moves
+	 * @return true, if the move was successfully executed.
+	 * @return false, if the move was unsuccessfully executed (illegal move).
+	 */
 	@Override
 	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
 		if(!board[this.startIndex].piece.player.equals(player)) {
@@ -164,23 +193,6 @@ public class Pawn extends Piece {
 		
 		
 		ArrayList<Integer> moveList = getMoveList(this.startIndex,player,board);
-		/*
-		if(this.firstMove) {
-			if(player.equals("w")) {
-				if(board[this.startIndex-16].gridEmpty) {
-					if(!Piece.executeMoveKingChecked(board, this.startIndex, this.startIndex-16, player)) {
-						moveList.add(this.startIndex-16);
-					}
-				}
-			} else {
-				if(board[this.startIndex+16].gridEmpty) {
-					if(!Piece.executeMoveKingChecked(board, this.startIndex, this.startIndex+16, player)) {
-						moveList.add(this.startIndex+16);
-					}
-				}
-			}
-		}
-		*/
 		
 		// Checks if move is en passant
 		int row = (int) Math.floor(startIndex/8);
@@ -198,13 +210,8 @@ public class Pawn extends Piece {
 				}
 			}
 		}
-		
-		//Piece.RowColPrintList(moveList);
-		//System.out.println(Piece.convertRowCol(startIndex));
-		//System.out.println(Piece.convertRowCol(endIndex));
 		if(moveList.contains(endIndex)) {
 			if(!Piece.executeMoveKingChecked(board, this.startIndex, endIndex, player)) {
-				// TODO also check if pawn is promo
 				Piece.executeMove(board, this.startIndex, endIndex, moveHistory);
 				this.firstMove = false;
 				if(enpassant) {
@@ -226,6 +233,9 @@ public class Pawn extends Piece {
 		return false;
 	}
 	
+	/**
+	 * @return the string format for which the Pawn piece is printed
+	 */
 	public String toString() {
 		return this.player + "p ";
 	}

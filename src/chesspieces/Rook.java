@@ -3,16 +3,31 @@ package chesspieces;
 import java.util.ArrayList;
 
 /**
- * 
- * @author Andrew Zhou, Bang An
- * 
+ * The Rook piece for chess.
+ * This class allows moving the Rook and getting a list of all available moves for a particular Rook.
+ * @author Andrew Zhou
+ * @author Bang An
+ * @version javaSE-1.8
  */
 
 public class Rook extends Piece {
+	
+	/**
+	 * Creates a new Rook
+	 * @param player. The player which the Rook belongs to
+	 * @param startIndex. The initial starting location of the Rook
+	 */
 	public Rook(String player, int startIndex) {
 		super(player, startIndex);
 	}
 	
+	/**
+	 * Implementing the abstract method, getMoveList, from Piece.
+	 * @param startIndex. Where the piece initially is located
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @return ArrayList of all indices where the Rook piece can move
+	 */
 	@Override
 	public ArrayList<Integer> getMoveList(int startIndex, String player, Node[] board) {
 		ArrayList<Integer> moveList = new ArrayList<Integer>();
@@ -72,6 +87,15 @@ public class Rook extends Piece {
 		return moveList;
 	}
 	
+	/**
+	 * Implementing the abstract method, move, from Piece.
+	 * @param end. User input to where the move should go
+	 * @param player. Which player is the piece
+	 * @param board. The chess board
+	 * @param moveHistory. An ArrayList of previous moves
+	 * @return true, if the move was successfully executed.
+	 * @return false, if the move was unsuccessfully executed (illegal move).
+	 */
 	@Override
 	public boolean move(String end, String player, Node[] board, ArrayList<String> moveHistory) {
 		if(!board[this.startIndex].piece.player.equals(player)) {
@@ -90,6 +114,9 @@ public class Rook extends Piece {
 		return false;
 	}
 
+	/**
+	 * @return the string format for which the Rook piece is printed
+	 */
 	public String toString() {
 		return this.player + "R ";
 	}
